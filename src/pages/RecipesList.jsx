@@ -35,7 +35,7 @@ export default function RecipesList() {
 
     const handleSearch = (e) => {
         const value = e.target.value;
-        setSearchParams(value ? { q: value } : {});
+        setSearchParams(value ? { q: value } : {}, { replace: true });
     }
 
     const filtered = recipes.filter(recipe =>

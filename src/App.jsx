@@ -13,7 +13,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/recipes/:id" element={<RecipeDetails />} />
+        <Route path="recipes/:id" element={<RecipeDetails />} />
         <Route path="recipes" element={<RecipesList />} />
         <Route path="login/controlled" element={<ControlledLogin />} />
         <Route path="login/uncontrolled" element={<UncontrolledLogin />} />

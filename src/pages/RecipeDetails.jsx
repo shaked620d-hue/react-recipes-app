@@ -42,33 +42,29 @@ export default function RecipeDetails() {
     return (
         <div>
             <p><Link to="/recipes">חזרה לרשימה</Link></p>
-            {recipe && (
-                <>
-                    <h1>{recipe.name}</h1>
-                    <p>זמן הכנה: {recipe.prepTimeMinutes} דקות |
-                        זמן בישול: {recipe.cookTimeMinutes} דקות |
-                        מספר מנות: {recipe.servings} |
-                        רמת קושי: {recipe.difficulty}
-                    </p>
-                    <img src={recipe.image} alt={recipe.name} width={300} />
-                    <h3>מצרכים</h3>
-                    <ul>
-                        {recipe.ingredients.map((ingredient, index) => (
-                            <li key={index}>{ingredient}</li>
-                        ))}
-                    </ul>
-                    <h3>הוראות הכנה</h3>
-                    <ol>
-                        {recipe.instructions.map((step, index) => (
-                            <li key={index}>{step}</li>
-                        ))}
-                    </ol>
+            <h1>{recipe.name}</h1>
+            <p>זמן הכנה: {recipe.prepTimeMinutes} דקות |
+                זמן בישול: {recipe.cookTimeMinutes} דקות |
+                מספר מנות: {recipe.servings} |
+                רמת קושי: {recipe.difficulty}
+            </p>
+            <img src={recipe.image} alt={recipe.name} width={300} />
+            <h3>מצרכים</h3>
+            <ul>
+                {recipe.ingredients.map((ingredient, index) => (
+                    <li key={index}>{ingredient}</li>
+                ))}
+            </ul>
+            <h3>הוראות הכנה</h3>
+            <ol>
+                {recipe.instructions.map((step, index) => (
+                    <li key={index}>{step}</li>
+                ))}
+            </ol>
 
-                    <div style={{ marginTop: '20px' }}>
-                        <Link to={`/recipes/${Number(id) + 1}`}>המתכון הבא</Link>
-                    </div>
-                </>
-            )}
+            <div style={{ marginTop: '20px' }}>
+                <Link to={`/recipes/${Number(id) + 1}`}>המתכון הבא</Link>
+            </div>
 
         </div>
     );
