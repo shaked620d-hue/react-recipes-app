@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
 import { useNavigate } from "react-router";
 import DemoCredentials from "../components/DemoCredentials";
 import { validateLogin } from "../data/users";
+import schema from "../utils/schema";
 
 export default function RhfLogin() {
   const [error, setError] = useState("");
@@ -10,8 +12,8 @@ export default function RhfLogin() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, touchedFields },
+  } = useForm({ resolver: joiResolver(schema), mode: "onTouched" });
 
   function onSubmit({ email, password }) {
     const loginError = validateLogin(email, password);
@@ -29,33 +31,25 @@ export default function RhfLogin() {
           <input
             type="email"
             autoComplete="username"
-            aria-invalid={Boolean(errors.email)}
-            {...register("email", {
-              required: "שדה האימייל הוא חובה.",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "יש להזין כתובת אימייל תקינה.",
-              },
-            })}
+            aria-invalid={Boolean(touchedFields.email && errors.email)}
+            {...register("email")}
           />
         </label>
-        {errors.email && <p role="alert">{errors.email.message}</p>}
+        {touchedFields.email && errors.email && (
+          <p role="alert">{errors.email.message}</p>
+        )}
         <label>
           סיסמה
           <input
             type="password"
             autoComplete="current-password"
-            aria-invalid={Boolean(errors.password)}
-            {...register("password", {
-              required: "שדה הסיסמה הוא חובה.",
-              minLength: {
-                value: 6,
-                message: "הסיסמה חייבת להכיל לפחות 6 תווים.",
-              },
-            })}
+            aria-invalid={Boolean(touchedFields.password && errors.password)}
+            {...register("password")}
           />
         </label>
-        {errors.password && <p role="alert">{errors.password.message}</p>}
+        {touchedFields.password && errors.password && (
+          <p role="alert">{errors.password.message}</p>
+        )}
         <button type="submit">התחברות</button>
       </form>
       {error && <p role="alert">{error}</p>}

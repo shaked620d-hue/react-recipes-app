@@ -1,0 +1,23 @@
+import Joi from "joi";
+
+const schema = Joi.object({
+  email: Joi.string()
+    .trim()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+      "string.empty": "אימייל הוא שדה חובה.",
+      "string.email": "כתובת האימייל אינה תקינה.",
+      "any.required": "אימייל הוא שדה חובה.",
+    }),
+  password: Joi.string()
+    .min(6)
+    .required()
+    .messages({
+      "string.empty": "סיסמה היא שדה חובה.",
+      "string.min": "הסיסמה חייבת להכיל לפחות 6 תווים.",
+      "any.required": "סיסמה היא שדה חובה.",
+    }),
+});
+
+export default schema;
