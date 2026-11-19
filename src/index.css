@@ -11,6 +11,10 @@ input {
   margin-block: 10px;
 }
 
+label {
+  display: block;
+}
+
 button {
   padding: 6px 14px;
   font-size: 16px;
